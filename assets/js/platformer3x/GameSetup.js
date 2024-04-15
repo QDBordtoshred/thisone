@@ -20,6 +20,7 @@ import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
+import Port from './Port.js';
 
 //test comment
 
