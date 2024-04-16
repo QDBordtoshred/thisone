@@ -83,6 +83,25 @@ export class PlayerHills extends PlayerBase {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
                 }
+                case "port":
+                    // 1. Caught in tube
+                    if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
+                        // Position player in the center of the tube 
+                        this.x = this.collisionData.newX;
+                        // Using natural gravity wait for player to reach floor
+                        if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
+                            // Force end of level condition
+                            this.x = GameEnv.innerWidth + 1;
+                        }
+                    // 2. Collision between player right and tube   
+                    } else if (this.collisionData.touchPoints.this.right) {
+                        this.state.movement.right = false;
+                        this.state.movement.left = true;
+                    // 3. Collision between player left and tube
+                    } else if (this.collisionData.touchPoints.this.left) {
+                        this.state.movement.left = false;
+                        this.state.movement.right = true;
+                    }
                 break;
             case "goomba": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
